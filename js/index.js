@@ -6,11 +6,12 @@ function updateSubtotal(product) {
     const price = product.children.item(1);
     const quantity = product.children.item(2);
     const subtotal = product.children.item(3);
-    subtotal.innerText =
+    subtotal.firstElementChild.innerText =
       parseFloat(price.firstElementChild.innerText) *
       parseFloat(quantity.firstElementChild.value).toFixed(2);
-    return subtotal.innerText;
+    return subtotal.firstElementChild.innerText
   }
+  
   /*   const price = parseFloat(document.querySelector(".price span").innerText)
   const quantity = parseFloat(document.querySelector(".quantity input").value)
   const subtotal = document.querySelector(".subtotal span")
@@ -27,18 +28,15 @@ function calculateAll() {
 
   // ITERATION 2
   const products = document.getElementsByClassName('product');
-  for (let i in products) {
+  
+  for (let i=0;i < products.length; i++) {
     updateSubtotal(products.item(i));
   }
-  const subtotals = document.getElementsByClassName('subtotal');
-  console.log(subtotals);
-  //subtotals is a HTMLcollection element, not an array, we can't use reduce() here
+  const subtotalSpans = document.querySelectorAll('.subtotal span');
+  //subtotals is a nodelists element, not an array, we can't use reduce() here
   let sum = 0;
-  if (subtotals.length != 0) {
-    for (let i in subtotals) {
-      sum += parseFloat(subtotals.item(i).lastChild.textContent);
-    }
-  }
+  subtotalSpans.forEach((ele)=> sum+= +ele.innerText)
+
   // ITERATION 3
   const total = document.getElementById('total-value').firstElementChild;
   total.innerText = sum;
