@@ -74,9 +74,10 @@ function createProduct(event) {
 }
 
 function newTr() {
+  // practice creating objects one by one
   const newProduct = document.createElement('tr');
   newProduct.className = 'product';
-  const name = newProduct.appendChild(document.createElement('td'));
+   /* const name = newProduct.appendChild(document.createElement('td'));
   const price = newProduct.appendChild(document.createElement('td'));
   const quantity = newProduct.appendChild(document.createElement('td'));
   const subtotal = newProduct.appendChild(document.createElement('td'));
@@ -100,7 +101,23 @@ function newTr() {
   action.className = 'action';
   action.appendChild(document.createElement('button'));
   action.firstElementChild.className = 'btn btn-remove';
-  action.firstElementChild.innerHTML = 'Remove';
+  action.firstElementChild.innerHTML = 'Remove'; */
+
+  // we could simple add a string as innerHTML
+  newProduct.innerHTML = `        
+  <tr class="product">
+  <td class="name">
+    <span>Ironhack Rubber Duck</span>
+  </td>
+  <td class="price">$<span>25.00</span></td>
+  <td class="quantity">
+    <input type="number" value="0" min="0" placeholder="Quantity" />
+  </td>
+  <td class="subtotal">$<span>0</span></td>
+  <td class="action">
+    <button class="btn btn-remove">Remove</button>
+  </td>
+</tr>`
   return newProduct;
 }
 
