@@ -57,20 +57,29 @@ function removeProduct(event) {
 
 function createProduct(event) {
   // get the current target so that we can get the values
-  const newProductName = document.getElementById('new-product-name').value;
-  const newProductPrice = document.getElementById('new-product-price').value;
+  const newProductName = document.getElementById('new-product-name');
+  const newProductPrice = document.getElementById('new-product-price');
   // deep clone the first product
   const firstProduct = document.querySelector('.product');
+  // check empty inputs 
+  if(!newProductName.value || !newProductPrice.value){
+    alert("can't add incomplete product information"); 
+  }else{
   /* const newProduct = firstProduct.cloneNode(true) */
   const newProduct = newTr();
   console.log(newProduct);
-  newProduct.children.item(0).firstElementChild.innerText = newProductName;
-  newProduct.children.item(1).firstElementChild.innerText = newProductPrice;
+  newProduct.children.item(0).firstElementChild.innerText = newProductName.value; 
+  newProduct.children.item(1).firstElementChild.innerText = newProductPrice.value;
   newProduct.children
     .item(4)
     .firstElementChild.addEventListener('click', removeProduct);
   const parent = document.querySelector('tbody');
-  parent.appendChild(newProduct);
+  parent.appendChild(newProduct);}
+
+  // clean input
+  newProductName.value = ""
+  newProductPrice.value = "0"
+
 }
 
 function newTr() {
@@ -105,19 +114,19 @@ function newTr() {
 
   // we could simple add a string as innerHTML
   newProduct.innerHTML = `        
-  <tr class="product">
-  <td class="name">
-    <span>Ironhack Rubber Duck</span>
-  </td>
-  <td class="price">$<span>25.00</span></td>
-  <td class="quantity">
-    <input type="number" value="0" min="0" placeholder="Quantity" />
-  </td>
-  <td class="subtotal">$<span>0</span></td>
-  <td class="action">
-    <button class="btn btn-remove">Remove</button>
-  </td>
-</tr>`
+   <tr class="product">
+    <td class="name">
+      <span>Ironhack Rubber Duck</span>
+    </td>
+    <td class="price">$<span>25.00</span></td>
+    <td class="quantity">
+      <input type="number" value="0" min="0" placeholder="Quantity" />
+    </td>
+    <td class="subtotal">$<span>0</span></td>
+    <td class="action">
+      <button class="btn btn-remove">Remove</button>
+    </td>
+  </tr>`;
   return newProduct;
 }
 
